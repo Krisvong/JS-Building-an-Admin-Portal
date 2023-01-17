@@ -1,3 +1,4 @@
+
 //get all your books
 async function main() {
  const response = await fetch('http://localhost:3001/listBooks')
@@ -6,6 +7,7 @@ async function main() {
  books.forEach(renderBook)
 }
 
+//book title, input, button
 function renderBook(book) {
     console.log(book)
     const root = document.getElementById('root')
@@ -19,12 +21,14 @@ function renderBook(book) {
     const saveButton = document.createElement('button')
     saveButton.textContent = 'Save'
 
+//add event listener to save button to make request to update book
     saveButton.addEventListener('click', () => {
         const body = {
             id: book.id,
             quantity: input.value
         }
         
+ //fetch request       
       fetch('http://localhost:3001/updateBook', {
         method: 'PATCH',
         headers: {
